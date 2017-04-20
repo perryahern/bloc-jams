@@ -21,10 +21,25 @@ var albumMarconi = {
     albumArtUrl: 'assets/images/album_covers/20.png',
     songs: [
         { title: 'Hello, Operator?', duration: '1:01' },
-        { title: 'Ring, ring, ring', duration: '5:01' },
-        { title: 'Fits in your pocket', duration: '3:21' },
-        { title: 'Can you hear me now?', duration: '3:14' },
-        { title: 'Wrong phone number', duration: '2:15' }
+        { title: 'Ring, Ring, Ring', duration: '5:01' },
+        { title: 'Fits In Your Pocket', duration: '3:21' },
+        { title: 'Can You Hear Me Now?', duration: '3:14' },
+        { title: 'Wrong Phone Number', duration: '2:15' }
+    ]
+};
+
+var albumTesla = {
+    title: 'Currently Alternative',
+    artist: 'Nikola Tesla',
+    label:  'The Coil',
+    year: '1887',
+    albumArtUrl: 'assets/images/album_covers/06.png',
+    songs: [
+        { title: 'All Sparked Up', duration: '3:45' },
+        { title: 'I See Through You', duration: '5:31' },
+        { title: 'Remotely Controlled', duration: '2:46' },
+        { title: 'The Warden of Clyffe', duration: '3:33' },
+        { title: 'Edison Was a Hack', duration: '3:24' }
     ]
 };
 
@@ -62,3 +77,14 @@ var setCurrentAlbum = function(album) {
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
 };
+
+document.getElementsByClassName('album-cover-art')[0].addEventListener('click', function() {
+    var displayedAlbum = document.getElementsByClassName('album-view-title')[0].textContent;
+    if (displayedAlbum === 'The Colors') {
+        setCurrentAlbum(albumMarconi);
+    } else if (displayedAlbum === 'The Telephone') {
+        setCurrentAlbum(albumTesla);
+    } else {
+        setCurrentAlbum(albumPicasso)
+    }
+});
