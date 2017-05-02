@@ -160,6 +160,26 @@ var previousSong = function() {
     $lastSongNumberCell.html(lastSongNumber);
 };
 
+var togglePlayFromPlayerBar = function() {
+    // If Play is clicked with nothing selected, default to first song on the album
+    if (currentSoundFile === null) {
+        setSong(1);
+        updatePlayerBarSong();
+    }
+
+    var $currentSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+
+    if (currentSoundFile.isPaused()) {
+        $('.main-controls .play-pause').html(playerBarPauseButton);
+        $currentSongNumberCell.html(pauseButtonTemplate);
+        currentSoundFile.play();
+    } else {
+        $('.main-controls .play-pause').html(playerBarPlayButton);
+        $currentSongNumberCell.html(playButtonTemplate);
+        currentSoundFile.pause();
+    }
+};
+
 var updatePlayerBarSong = function() {
     $('.currently-playing .song-name').text(currentSongFromAlbum.title);
     $('.currently-playing .artist-name').text(currentAlbum.artist);
@@ -180,9 +200,11 @@ var currentVolume = 80;
 
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
+var $playPausePlayerBarButton = $('.main-controls .play-pause');
 
 $(document).ready(function() {
     setCurrentAlbum(albumPicasso);
     $previousButton.click(previousSong);
     $nextButton.click(nextSong);
+    $playPausePlayerBarButton.click(togglePlayFromPlayerBar)     // need the () ?????
 });
